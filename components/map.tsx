@@ -8,6 +8,7 @@ type Props = {};
 
 const Map = (props: Props) => {
   const mapRef = useRef<HTMLDivElement>(null);
+  const currentInfoWindow = useRef<google.maps.InfoWindow | null>(null);
 
   useEffect(() => {
     const initMap = async () => {
@@ -53,9 +54,8 @@ const Map = (props: Props) => {
           </p>
           <p class="leading-7 pb-2">
               ${restaurant.address1}, ${restaurant.city}, ${restaurant.state}
-            </p>
+          </p>
           <div class="pl-1">
-            
             <p>Dave gave ${restaurant.name} a <span class="font-bold">${restaurant.dave_review_stats.totalScore}</span></p>
             <div class="pt-3 pb-2">
               <a href="${restaurant.href}" target="_blank" rel="noopener noreferrer" class="text-blue-500">Watch the review</a>
@@ -69,7 +69,11 @@ const Map = (props: Props) => {
         });
 
         marker.addListener("click", () => {
+          if (currentInfoWindow.current) {
+            currentInfoWindow.current.close();
+          }
           infoWindow.open(map, marker);
+          currentInfoWindow.current = infoWindow;
         });
       }
     };
