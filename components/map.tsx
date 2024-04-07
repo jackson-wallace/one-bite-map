@@ -28,6 +28,8 @@ const Map = (props: Props) => {
         zoom: 15,
         minZoom: 3,
         gestureHandling: "greedy",
+        streetViewControl: false, // disable Street View
+        zoomControl: false,
         mapId: "one-bite-map",
       };
 
