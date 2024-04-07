@@ -27,6 +27,7 @@ const Map = (props: Props) => {
         center: position,
         zoom: 15,
         minZoom: 3,
+        gestureHandling: "greedy",
         mapId: "one-bite-map",
       };
 
