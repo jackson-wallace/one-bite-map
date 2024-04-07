@@ -3,6 +3,7 @@
 import { restaurantData } from "@/lib/restaurant-data";
 import { Loader } from "@googlemaps/js-api-loader";
 import { useEffect, useRef } from "react";
+import { MarkerF } from "@react-google-maps/api";
 
 type Props = {};
 
@@ -53,13 +54,12 @@ const Map = (props: Props) => {
             ${restaurant.name}
           </p>
           <p class="leading-7 pb-2">
-              ${restaurant.address1}, ${restaurant.city}, ${restaurant.state}
+              📍 ${restaurant.address1}, ${restaurant.city}, ${restaurant.state}
           </p>
-          <div class="pl-1">
-            <p>Dave gave ${restaurant.name} a <span class="font-bold">${restaurant.dave_review_stats.totalScore}</span></p>
-            <div class="pt-3 pb-2">
-              <a href="${restaurant.href}" target="_blank" rel="noopener noreferrer" class="text-blue-500">Watch the review</a>
-            </div>
+          <p>🍕 Dave gave ${restaurant.name} a <span class="font-bold">${restaurant.dave_review_stats.totalScore}</span></p>
+          <div class="pt-3 pb-2">
+            <span>🔗 </span>
+            <a href="${restaurant.href}" target="_blank" rel="noopener noreferrer" class="text-blue-500">Watch the review</a>
           </div>
         </div>
         `;
