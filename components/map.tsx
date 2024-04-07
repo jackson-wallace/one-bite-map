@@ -3,7 +3,6 @@
 import { restaurantData } from "@/lib/restaurant-data";
 import { Loader } from "@googlemaps/js-api-loader";
 import { useEffect, useRef } from "react";
-import { MarkerF } from "@react-google-maps/api";
 
 type Props = {};
 
@@ -27,6 +26,7 @@ const Map = (props: Props) => {
       const mapOptions: google.maps.MapOptions = {
         center: position,
         zoom: 15,
+        minZoom: 3,
         mapId: "one-bite-map",
       };
 
@@ -35,7 +35,6 @@ const Map = (props: Props) => {
 
       // ADD MARKERS
       const { Marker } = await loader.importLibrary("marker");
-
       for (const restaurant of restaurantData) {
         const position = {
           lat: restaurant.location.coordinates[1],
@@ -45,6 +44,10 @@ const Map = (props: Props) => {
         const marker = new Marker({
           position: position,
           map,
+          icon: {
+            url: "https://emojicdn.elk.sh/🍕",
+            scaledSize: new google.maps.Size(35, 35),
+          },
           title: restaurant.name,
         });
 
