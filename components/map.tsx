@@ -4,9 +4,7 @@ import { restaurantData } from "@/lib/restaurant-data";
 import { Loader } from "@googlemaps/js-api-loader";
 import { useEffect, useRef } from "react";
 
-type Props = {};
-
-const Map = (props: Props) => {
+const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const currentInfoWindow = useRef<google.maps.InfoWindow | null>(null);
 
@@ -35,6 +33,14 @@ const Map = (props: Props) => {
 
       // create the map
       const map = new Map(mapRef.current as HTMLDivElement, mapOptions);
+
+      // Add click listener to close InfoWindow when clicking on the map
+      map.addListener("click", () => {
+        if (currentInfoWindow.current) {
+          currentInfoWindow.current.close();
+          currentInfoWindow.current = null;
+        }
+      });
 
       // ADD MARKERS
       const { Marker } = await loader.importLibrary("marker");
@@ -68,6 +74,11 @@ const Map = (props: Props) => {
             <a href="${restaurant.href}" target="_blank" rel="noopener noreferrer" class="text-blue-500">Watch the review</a>
           </div>
         </div>
+        <style>
+          .gm-style-iw button {
+            display: none !important;
+          }
+        </style>
         `;
 
         const infoWindow = new google.maps.InfoWindow({
