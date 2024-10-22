@@ -2,11 +2,9 @@
 
 import { restaurantData } from "@/lib/restaurant-data";
 import { Loader } from "@googlemaps/js-api-loader";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
-type Props = {};
-
-const Map = (props: Props) => {
+const Map = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const currentInfoWindow = useRef<google.maps.InfoWindow | null>(null);
 
